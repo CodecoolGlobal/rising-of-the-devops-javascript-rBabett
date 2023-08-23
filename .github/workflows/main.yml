@@ -55,7 +55,8 @@ jobs:
       runs-on: ubuntu-latest
       # build Docker image and push to docker hub
       # only if the app build and test successfully
-      needs: [build_test]
+      needs: build_test
+      if: always() && needs.build_test.result == 'success'
 
       steps:
         - name: checkout repo
